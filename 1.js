@@ -6,8 +6,8 @@ hostname = miniapp.guniuniu.com
 
 
 let obj = JSON.parse($response.body);
-obj.data.nickName = "Baby";
-obj.data.vipTime = "2099-09-09 02:20:13";
+obj.data.nickName = "zkj测试";
+obj.data.vipTime = "2199-09-09 19:59:59";
 //obj.data.svipTime = "2099-09-09 02:20:13";
 $done({
 
