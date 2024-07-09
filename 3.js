@@ -10,27 +10,40 @@ hostname = app.zhongyi108.com
 
 */
 
-let obj = JSON.parse($response.body);
+if (typeof $response !== 'undefined' && $response.body) {
+    let body = JSON.parse($response.body);
 
-const userGetUcenterData = /\/api\/user\/getUcenterData/;
-const courseGetDetail = /\/api\/course\/getDetail/;
-const userGetUserInfoNew = /\/api\/user\/getUserInfoNew/;
+    function modifyObject(obj) {
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    modifyObject(obj[key]);
+                } else {
+                    switch (key) {
+                        case 'is_vip':
+                        case 'is_svip':
+                        case 'is_teacher':
+                        case 'is_follow':
+                            obj[key] = 1;
+                            break;
+                        case 'end_vip_time':
+                        case 'end_svip_time':
+                            obj[key] = '2099-12-31 23:59:59';
+                            break;
+                        case 'tui_bean':
+                            obj[key] = 9999;
+                            break;
+                        case 'user_level':
+                            obj[key] = 9;
+                            break;
+                    }
+                }
+            }
+        }
+    }
 
-if (userGetUcenterData.test($request.url)) {
-        obj.data.is_svip = 1;
-        obj.data.is_teacher = 1;
-        obj.data.is_vip = 1;
-} else if (courseGetDetail.test($request.url)) {
-    // 处理课程详情
-        obj.data.teacher.is_vip = 1;
-        obj.data.teacher.user_level = 9;
-		obj.data.teacher.is_follow = 1
-} else if (userGetUserInfoNew.test($request.url)) {
-        obj.data.is_vip = 1;
-		obj.data.is_svip = 1;
-		obj.data.tui_bean = 9999;
-        obj.data.end_vip_time = '2099-12-31 23:59:59';
-		obj.data.end_svip_time = '2099-12-31 23:59:59';
+    modifyObject(body);
+    $response.body = JSON.stringify(body);
 }
 
-$done({ body: JSON.stringify(obj) });
+$done({ body: $response.body });
