@@ -20,7 +20,7 @@ if (vip1.test($request.url)) {
 } else if (vip2.test($request.url)) {
   obj.vip_status = "1";
 } else if (vip3.test($request.url)) {
-  obj.isvip = true;
+  obj.is_vip = true;
 } else if (vip4.test($request.url)) {
     obj.is_vip = true;
 }
