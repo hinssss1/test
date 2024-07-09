@@ -1,5 +1,5 @@
 [rewrite_local]
-^https:\/\/miniapp\.guniuniu\.com\/api\/mini-app\/user$ url script-response-body local-modifyResponse.js
+^https:\/\/miniapp\.guniuniu\.com\/api\/mini-app\/user$ url script-response-body https://raw.githubusercontent.com/hinssss1/test/master/1.js
 
 [mitm]
 hostname = miniapp.guniuniu.com
