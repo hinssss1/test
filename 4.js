@@ -1,31 +1,63 @@
 /*
 [rewrite_local]
-https://api.hcreator.cn/wapsPay/goods/language/get.do url script-response-body https://raw.githubusercontent.com/hinssss1/test/master/4.js
+https://mob.mddcloud.com.cn/api/member/getInfo.action url script-response-body https://raw.githubusercontent.com/hinssss1/test/master/4.js
 [mitm]
-hostname = api.hcreator.cn
+hostname = mob.mddcloud.com.cn
 */
 
 let obj = JSON.parse($response.body);
 
-const getLanguage = /\/wapsPay\/goods\/language\/get\.do/;
+const getMemberInfo = /\/api\/member\/getInfo\.action/;
 
-if (getLanguage.test($request.url)) {
+if (getMemberInfo.test($request.url)) {
     if (obj.data) {
-        // 修改商品价格为 0.01
-        obj.data.goodsPrice = 0.01;
-		obj.data.goodsPoint = 1
-        
-        // 修改折扣为最大折扣（1 表示无折扣，所以我们设置一个很小的值）
-        obj.data.discount = 0.01;
-        obj.data.vipDiscount = 0.01;
-        
-        // 添加 VIP 状态（假设这些字段存在或需要被添加）
-        obj.data.isVIP = true;
-        obj.data.vipStatus = "active";
-        obj.data.vipExpireDate = "2099-12-31";
-        
-        // 修改商品描述
-        obj.data.goodsDes = "终身VIP会员";
+        // 修改VIP等级
+        obj.data.vipLevel = 9;
+        obj.data.isVodVip = 1;
+        obj.data.isPay = 1;
+        obj.data.isOncePaid = 1;
+
+        // 修改会员信息
+        obj.data.lvInfo = {
+            name: "至尊VIP会员",
+            privilege: "享受所有特权",
+            rule: "永久有效",
+            uuid: "vip_uuid_9999",
+            activity: "所有活动免费参与",
+            experience: 99999,
+            createTime: "2021-01-01 00:00:00",
+            seq: 9999
+        };
+
+        // 设置VIP有效期
+        obj.data.vipEffectiveDate = "2099-12-31 23:59:59";
+        obj.data.vipEffectiveDifferenceDay = 99999;
+
+        // 修改用户经验值和积分
+        obj.data.experience = 99999;
+        obj.data.score = 99999;
+
+        // 修改平台等级信息
+        obj.data.platformLevelVo = {
+            height: 99,
+            dayGainTotalExp: 9999,
+            memberExp: 99999,
+            title: "至尊会员",
+            uuid: 9999,
+            width: 999,
+            level: 99,
+            exp: 99999,
+            isPossess: 1,
+            levelImg: "http://example.com/vip_level_icon.png",
+            dayGainExp: 999
+        };
+
+        // 移除下一级信息，因为已经是最高级
+        delete obj.data.nextLvInfo;
+
+        // 修改其他可能的VIP相关字段
+        obj.data.allowModifyPost = 1;
+        obj.data.whiteListEnable = true;
     }
 }
 
