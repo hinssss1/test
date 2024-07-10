@@ -24,6 +24,8 @@ if (userGetUcenterData.test($request.url)) {
     obj.data.teacher.is_follow = 1;
 	obj.data.isboutique = 1
 	obj.data.virtual_buyers = 1
+	obj.data.is_list = 1
+	obj.data.is_buy = 1
 } else if (userGetUserInfoNew.test($request.url)) {
     obj.data.is_vip = 1;
     obj.data.is_svip = 1;
