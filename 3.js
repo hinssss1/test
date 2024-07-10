@@ -1,3 +1,10 @@
+/*
+[rewrite_local]
+https://app.zhongyi108.com/api/(user/getUcenterData|course/getDetail|user/getUserInfoNew) url script-response-body https://raw.githubusercontent.com/hinssss1/test/master/3.js
+[mitm]
+hostname = app.zhongyi108.com
+*/
+
 let obj = JSON.parse($response.body);
 
 const userGetUcenterData = /\/api\/user\/getUcenterData/;
