@@ -26,6 +26,7 @@ if (userGetUcenterData.test($request.url)) {
 	obj.data.virtual_buyers = 1
 	obj.data.is_list = 1
 	obj.data.is_buy = 1
+	obj.data.lock = 0
 } else if (userGetUserInfoNew.test($request.url)) {
     obj.data.is_vip = 1;
     obj.data.is_svip = 1;
