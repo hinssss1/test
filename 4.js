@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-https://api.hcreator.cn/wapsPay/goods/language/get.do url script-response-body https://raw.githubusercontent.com/your_username/your_repo/master/4.js
+https://api.hcreator.cn/wapsPay/goods/language/get.do url script-response-body https://raw.githubusercontent.com/hinssss1/test/master/4.js
 [mitm]
 hostname = api.hcreator.cn
 */
